@@ -7,6 +7,7 @@ import com.solegendary.reignofnether.building.buildings.placements.PortalPlaceme
 import com.solegendary.reignofnether.entities.models.NecromancerProjectileModel;
 import com.solegendary.reignofnether.entities.renderers.ThrowableTntRenderer;
 import com.solegendary.reignofnether.entities.renderers.NecromancerProjectileRenderer;
+import com.solegendary.reignofnether.guiscreen.PostMatchScoresGui;
 import com.solegendary.reignofnether.guiscreen.TopdownGui;
 import com.solegendary.reignofnether.registrars.*;
 import com.solegendary.reignofnether.unit.modelling.models.*;
@@ -169,6 +170,7 @@ public class CommonModEvents {
     @SubscribeEvent
     public static void onClientSetupEvent(FMLClientSetupEvent evt) {
         evt.enqueueWork(() -> MenuScreens.register(ContainerRegistrar.TOPDOWNGUI_CONTAINER.get(), TopdownGui::new));
+        evt.enqueueWork(() -> MenuScreens.register(ContainerRegistrar.POSTMATCHSCORESGUI_CONTAINER.get(), PostMatchScoresGui::new));
     }
 
     @SubscribeEvent
