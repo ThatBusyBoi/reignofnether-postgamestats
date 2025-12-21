@@ -1,6 +1,5 @@
 package com.solegendary.reignofnether.player;
 
-import com.mojang.serialization.Decoder;
 import com.solegendary.reignofnether.ReignOfNether;
 import com.solegendary.reignofnether.ability.HeroAbility;
 import com.solegendary.reignofnether.alliance.AlliancesServerEvents;
@@ -10,7 +9,6 @@ import com.solegendary.reignofnether.building.buildings.neutral.Beacon;
 import com.solegendary.reignofnether.building.buildings.placements.ProductionPlacement;
 import com.solegendary.reignofnether.gamemode.GameMode;
 import com.solegendary.reignofnether.gamemode.GameModeClientboundPacket;
-import com.solegendary.reignofnether.guiscreen.PostMatchScoresGuiContainer;
 import com.solegendary.reignofnether.guiscreen.TopdownGuiContainer;
 import com.solegendary.reignofnether.hero.HeroClientboundPacket;
 import com.solegendary.reignofnether.hero.HeroServerEvents;
@@ -674,16 +672,6 @@ public class PlayerServerEvents {
 
     private static ServerPlayer getPlayerById(int playerId) {
         return players.stream().filter(player -> playerId == player.getId()).findAny().orElse(null);
-    }
-
-    public static void openPostMatchScoresGui(int playerId) {
-        ServerPlayer serverPlayer = getPlayerById(playerId);
-
-        if (serverPlayer != null) {
-            MenuConstructor provider = PostMatchScoresGuiContainer.getServerContainerProvider();
-            MenuProvider namedProvider = new SimpleMenuProvider(provider, PostMatchScoresGuiContainer.TITLE);
-            NetworkHooks.openScreen(serverPlayer, namedProvider);
-        }
     }
 
     public static void openTopdownGui(int playerId) {

@@ -3,11 +3,11 @@ package com.solegendary.reignofnether.player;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.HashMap;
@@ -40,10 +40,9 @@ public class RTSPlayerScoresCommand {
     }
 
     public static int execute(CommandContext<CommandSourceStack> command) {
-        if (command.getSource().getEntity() instanceof ServerPlayer player) {
+        if (command.getSource().getEntity() instanceof Player player) {
             List<RTSPlayer> rtsPlayers = PlayerServerEvents.postGameRtsPlayers;
-            player.sendSystemMessage(Component.literal("This command is temporarily disabled. Try using '/rts-scores <targetPlayer>' instead."));
-            // PlayerServerEvents.openPostMatchScoresGui(player.getId());
+            player.sendSystemMessage(Component.literal(displayScores(rtsPlayers)));
         }
 
         return Command.SINGLE_SUCCESS;
